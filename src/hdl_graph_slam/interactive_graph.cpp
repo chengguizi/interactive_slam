@@ -247,6 +247,12 @@ bool InteractiveGraph::load_special_nodes(const std::string& directory, guik::Pr
   std::cout << "anchor_node:" << anchor_node->id() << std::endl;
   std::cout << "anchor_edge:" << anchor_edge->vertices()[0]->id() << " - " << anchor_edge->vertices()[1]->id() << std::endl;
 
+
+  g2o::SparseOptimizer* graph = dynamic_cast<g2o::SparseOptimizer*>(this->graph.get());
+  
+  graph->initializeOptimization();
+  graph->computeActiveErrors();
+
   anchor_node->setFixed(true);
 
   return true;
